@@ -1,0 +1,75 @@
+springboard.txt
+	
+	웹개발 - CRUD 구조
+	 Create
+	 Read
+	 Update
+	 Delete
+	 
+  * 개발 목표 설정
+  * 개발 진행도 체크
+  
+  DB -> 서비스 -> 컨트롤러 -> view
+  
+  * DB 준비사항
+    계정준비, 관련스키마(디비) 준비
+    테이블 설계(ERD) & 생성
+    더미(dummy)데이터 준비
+  * 스프링MVC 준비사항
+    패키지의 구조 결정 (이름,파일의 규칙)
+    개발 파트분배
+    테스트 동작
+  * 화면 준비사항
+    JSP출력/HTML+JS/Android 결정
+    (절대/상대)경로 결정
+   
+   
+    
+  * 영속성(persistence) 관련 준비
+   
+  - 디비 테이블 설계
+  - BoardVO 클래스 설계
+  - BoardDAO/BoardDAOImpl 설계
+  - XML Mapper 설계
+  - 테스트 실행
+  
+  * 비지니스(서비스) 계층
+  - 컨트롤러와 DAO 연결(접착제)
+  - 비지니스로직 마다 다른형태의 처리
+  - 컨트롤러의 영속계층(DAO)종속을 막아준다.
+  	(컨트롤러가 해야하는 일이 너무 많아짐)
+ 
+ * 컨트롤러 준비
+ 
+ - 공통적인 URI경로 (1차 도메인) *.me,*.bo => /members, /boards
+ - 각 기능별 URI를 설정
+ - 각 주소별 호출방식 결정(GET/POST) => REST(GET/POST/PUT(PATCH)/DELETE)
+ - 결과 처리, 이동할 페이지(리다이렉트) 처리
+ - 예외 처리
+ 
+ - 정보 조회, 데이터 전달(DB처리x),화면출력 => GET
+ - 데이터 처리(DB처리o) => POST
+  
+ 글쓰기 - 글정보 입력(GET)
+        - 입력된 글정보 저장(POST)
+  
+	 *boardMapper.xml 데이터 처리
+	  xml 형태의 데이터 파일에서 주로 사용
+	  
+ 	  PCDATA : Parsed Character DATA (파싱한 문자 데이터)
+ 	  CDATA  : (UnParsed) Character DATA (파싱하지 않는 문자 데이터)
+ 	  		  => 파싱으로 문제가 있을법한 동작을 제거
+ 	
+	 <![CDATA[	
+	  select * from tbl_board
+	  where bno > 0 (부등호 오류가능성 있음)
+	  ]]>
+	  
+	 >   &gt;
+	 <   &lt;
+	 >=  &gt;=
+	 <=  &lt;=
+  
+  
+  
+  
