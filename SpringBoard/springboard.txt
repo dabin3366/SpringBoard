@@ -111,6 +111,7 @@ springboard.txt
       prev = startPage != 1
   - 다음(boolean) next
   	  next = endPage * pageSize >= totalCount? false : true
+  	  next = endPage * pageSize <= totalCount
    ex) 한페이지 10개씩 출력, 총 122개
    => 필요한 페이지수? 13개, 페이지 블럭 10개
    
