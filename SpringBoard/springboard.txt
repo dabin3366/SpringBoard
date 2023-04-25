@@ -70,6 +70,70 @@ springboard.txt
 	 >=  &gt;=
 	 <=  &lt;=
   
+  * 페이징 처리 => 필요한 만큼의 데이터를 빠르게 가져와서 출력
+   1) 원하는 만큼의 글 정보를 가져오기
+   2) 페이지 하단부에 페이지블럭 계산
+   3) 본문,수정,삭제...에서 처리후에 원래 페이지로 이동
+  
+  * 페이징 처리
+   - <a> 태그 사용한 페이지 이동
+   - <form> 태그 사용한 페이지 이동
+  
+  => <a> 많은 양의 반복적인 링크 처리 할때
+     <form> 필요한 정보만 빠르게 처리 할때
+     
+  * 페이징 처리의 원칙
+   - 무조건 GET방식으로만 처리
+   - 페이징처리 된 화면에서는 반드시 목록으로 이동버튼이 필요함.
+   - 기존의 페이지를 유지해야함
+   - 페이징처리 결과에 따른 [다음] [이전] 버튼이 필요하다
+   
+   	select * from tbl_board
+   	limit (시작위치-1),(개수);
+   	
+   	한페이지당 10개씩 조회
+   	
+			   	페이지 1   2   3
+			   	     1~10 11~20 21~30
+			   ----------------------------
+(page-1) * 10         0   10  20
+   
+ * 페이지 하단부에 페이지블럭 계산
+  - 페이지 블럭수 : displayPageNum
+  - 페이지블럭 시작 번호 startPage
+      startPage = (endPage - displayPageNum) + 1
+  - 페이지블럭 끝 번호 endPage
+  	  endPage = (int)(Math.ceil(page/(double)displayPageNum)) * displayPageNum 
+  - 전체 글 개수 totalCount
+  	  DB 조회 - select count()
+  - 이전(boolean) prev : 시작값이 1인지 아닌지 판단
+      prev = startPage == 1? false : true
+      prev = startPage != 1
+  - 다음(boolean) next
+  	  next = endPage * pageSize >= totalCount? false : true
+   ex) 한페이지 10개씩 출력, 총 122개
+   => 필요한 페이지수? 13개, 페이지 블럭 10개
+   
+   - /boards/listCri?page=3
+   	 startPage : 1
+   	 endPage : 10
+   	 prev : F
+   	 next : T
+   
+   - /boards/listCri?page=10
+   	 startPage : 1
+   	 endPage : 10
+   	 prev : F
+   	 next : T
+   
+   - /boards/listCri?page=11
+   	 startPage : 11
+   	 endPage : 13
+   	 prev : T
+   	 next : F
+   
+   
+   
   
   
   

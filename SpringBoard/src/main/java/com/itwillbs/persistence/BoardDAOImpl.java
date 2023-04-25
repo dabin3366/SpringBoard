@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 
 @Repository
 public class BoardDAOImpl implements BoardDAO{
@@ -71,6 +72,25 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.delete(NAMESPACE+".removeBoard", bno);
 	}
 	
+	@Override
+	public List<BoardVO> getBoardListPage(Integer page) throws Exception {
+		logger.info("page : "+page);
+		
+		if(page <= 0) {
+			page = 1;
+		}
+		// 페이징 처리 정보 계산(글번호 인덱스 계산)
+		// 0   10   20   30.....
+		page = (page-1) * 10;
+		
+		return sqlSession.selectList(NAMESPACE+".listPage",page);
+	}
+	
+	@Override
+	public List<BoardVO> getBoardListCri(Criteria cri) throws Exception {
+		
+		return sqlSession.selectList(NAMESPACE+".listCri",cri);
+	}
 	
 	
 }

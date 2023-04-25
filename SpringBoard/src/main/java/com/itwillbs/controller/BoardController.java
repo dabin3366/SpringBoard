@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.service.BoardService;
 
 @Controller
@@ -120,6 +120,26 @@ public class BoardController {
 		}
 		
 		return "redirect:/boards/listALL";
+	}
+	
+	// http://localhost:8080/boards/listCri
+	// http://localhost:8080/boards/listCri?page=2
+	// http://localhost:8080/boards/listCri?page=2&pageSize=30
+	// 글 리스트(목록 - 페이징처리 cri) 조회
+	@RequestMapping(value = "/listCri",method = RequestMethod.GET)
+	public String listCriGET(Model model,Criteria cri) throws Exception {
+		logger.info("listCriGET() 호출");
+		
+//		Criteria cri = new Criteria();
+//		cri.setPage(1);
+//		cri.setPageSize(20);
+		
+		// 서비스 - 글(페이징처리된) 리스트 조회
+		List<BoardVO> boardListCri = service.getBoardListCri(cri);
+		// 글정보 view 페이지 전달
+		model.addAttribute("boardList",boardListCri);
+		
+		return "/boards/listCri";
 	}
 	
 	

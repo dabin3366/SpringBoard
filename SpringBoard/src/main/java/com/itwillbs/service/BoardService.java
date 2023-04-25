@@ -3,6 +3,7 @@ package com.itwillbs.service;
 import java.util.List;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 
 public interface BoardService {
 	
@@ -27,4 +28,6 @@ public interface BoardService {
 	// 게시판 글 삭제하기
 	public Integer removeBoard(Integer bno) throws Exception;
 	
+	// 게시판 글조회(페이징처리)
+	public List<BoardVO> getBoardListCri(Criteria cri) throws Exception;
 }

@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.itwillbs.domain.BoardVO;
+import com.itwillbs.domain.Criteria;
 import com.itwillbs.persistence.BoardDAO;
 
 @Service
@@ -59,5 +60,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public Integer removeBoard(Integer bno) throws Exception {
 		return bdao.deleteBoard(bno);
+	}
+	
+	@Override
+	public List<BoardVO> getBoardListCri(Criteria cri) throws Exception {
+		
+		return bdao.getBoardListCri(cri);
 	}
 }

@@ -4,7 +4,11 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.itwillbs.mapper.BoardMapper">
-
+	<!-- 컬럼명과 변수명을 매핑(모든 요소) -->
+	<resultMap type="com.itwillbs.domain.BoardVO" id="board">
+		<result property="content" column="content"/>
+	</resultMap>
+	
 	<!-- DB시간조회 -->
 	<select id="getTime" resultType="string">
 		select now()
@@ -41,6 +45,19 @@
 	<delete id="removeBoard">
 		delete from tbl_board where bno=#{bno}
 	</delete>
+	
+	<!-- 글정보 조회(페이징 처리) -->
+	<select id="listPage" resultType="BoardVO" resultMap="board">
+		select * from tbl_board
+		order by bno desc, regdate desc 
+		limit #{page},10
+	</select>
+	
+	<select id="listCri" resultType="BoardVO" resultMap="board">
+		select * from tbl_board
+		order by bno desc, regdate desc 
+		limit #{pageStart},#{pageSize}
+	</select>
 	
 	
 </mapper>
