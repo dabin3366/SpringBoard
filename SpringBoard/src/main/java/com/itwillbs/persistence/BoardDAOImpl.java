@@ -92,5 +92,9 @@ public class BoardDAOImpl implements BoardDAO{
 		return sqlSession.selectList(NAMESPACE+".listCri",cri);
 	}
 	
+	@Override
+	public int countPage() throws Exception {
+		return sqlSession.selectOne(NAMESPACE+".countPage");
+	}
 	
 }

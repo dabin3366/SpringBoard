@@ -31,7 +31,11 @@ public interface BoardDAO {
 	
 	// 글 페이징 처리(페이지 번호)
 	public List<BoardVO> getBoardListPage(Integer page) throws Exception;
+	
 	// 글 페이징 처리(페이지 번호,페이지 사이즈)
 	public List<BoardVO> getBoardListCri(Criteria cri) throws Exception;
+	
+	// 게시판 글 전체 갯수
+	public int countPage() throws Exception;
 	
 }

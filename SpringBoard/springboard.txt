@@ -133,6 +133,18 @@ springboard.txt
    	 prev : T
    	 next : F
    
+   파일업로드를 처리하는 객체 준비
+   <beans:bean id="multipartResolver"
+	            class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    maxUploadSize : 업로드 파일의 최대 크기
+		<beans:property name="maxUploadSize" value="52428800"/>
+		maxInMemorySize : 디스크에 임시파일을 생성하기 전에 메모리에 저장하는 임시공간의 크기
+		<beans:property name="maxInMemorySize" value="1000000"/>
+		defaultEncoding : 업로드 폼태그에서 전달되는 파라메터 인코딩 설정
+		<beans:property name="defaultEncoding" value="utf-8"/>
+   </beans:bean>
+   
+	
    
    
   

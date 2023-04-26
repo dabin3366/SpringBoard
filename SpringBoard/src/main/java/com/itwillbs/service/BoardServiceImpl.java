@@ -67,4 +67,9 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bdao.getBoardListCri(cri);
 	}
+	
+	@Override
+	public int countPage() throws Exception {
+		return bdao.countPage();
+	}
 }

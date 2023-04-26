@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.itwillbs.domain.BoardVO;
 import com.itwillbs.domain.Criteria;
+import com.itwillbs.domain.PageDTO;
 import com.itwillbs.service.BoardService;
 
 @Controller
@@ -140,6 +141,23 @@ public class BoardController {
 		model.addAttribute("boardList",boardListCri);
 		
 		return "/boards/listCri";
+	}
+	// http://localhost:8080/boards/listPage
+	@RequestMapping(value = "/listPage",method = RequestMethod.GET)
+	public void listPageGET(Criteria cri,Model model) throws Exception{
+		logger.info("listPage() 호출");
+		// 서비스 - 글(페이징처리된) 리스트 조회
+		List<BoardVO> boardListPage = service.getBoardListCri(cri);
+		// 글정보 view 페이지 전달
+		model.addAttribute("boardList",boardListPage);
+		
+		// 하단부 페이징 처리
+		PageDTO pageDTO = new PageDTO();
+		pageDTO.setCri(cri);
+		pageDTO.setTotalCount(service.countPage());
+		
+		logger.info(pageDTO.toString());
+		model.addAttribute("pageDTO", pageDTO);
 	}
 	
 	

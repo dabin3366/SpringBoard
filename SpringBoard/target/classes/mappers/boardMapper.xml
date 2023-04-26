@@ -59,5 +59,9 @@
 		limit #{pageStart},#{pageSize}
 	</select>
 	
+	<!-- 게시판 글 총 개수 -->
+	<select id="countPage" resultType="int">
+		select count(bno) from tbl_board
+	</select>
 	
 </mapper>

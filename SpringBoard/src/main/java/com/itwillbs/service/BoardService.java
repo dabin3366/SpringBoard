@@ -30,4 +30,7 @@ public interface BoardService {
 	
 	// 게시판 글조회(페이징처리)
 	public List<BoardVO> getBoardListCri(Criteria cri) throws Exception;
+	
+	// 게시판 글 전체 갯수 
+	public int countPage() throws Exception;
 }
